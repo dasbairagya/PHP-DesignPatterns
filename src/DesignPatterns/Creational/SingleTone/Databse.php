@@ -7,10 +7,10 @@ namespace App\DesignPatterns\Creational\SingleTone;
  * @author Anonymus <anonymous@test.com>
  */
 
-class DbConnect
+class Database
 {
     protected $pdo;
-
+    
     protected function getPdo(): \PDO
     {
         $servername = "localhost";
