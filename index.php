@@ -8,10 +8,12 @@ use App\DesignPatterns\Structural\DIP\Processor;
 use App\DesignPatterns\Structural\DIP\CsvFileWriter;
 use App\DesignPatterns\Structural\DIP\XmlFileWriter;
 
+use App\DesignPatterns\Creational\Factory\PlanFactory;
 use App\DesignPatterns\Structural\Adaptor\NewCsvFileWriter;
 use App\DesignPatterns\Structural\Adaptor\NewFileWriterAdaptor;
 
-use App\DesignPatterns\Creational\Factory\PlanFactory;
+use App\DesignPatterns\Behavioural\Observer\Newspaper;
+use App\DesignPatterns\Behavioural\Observer\Reader;
 
 $data = [1,2,3,4,5];
 
@@ -40,6 +42,24 @@ $plan = $plans[1];
 $planFactory = new PlanFactory;
 $plan = $planFactory->createPlan($plan);
 
-dd($plan);
+// dd($plan);
+dump($plan);
 
+
+/*********Implementation of Observer design pattern to create the object as needed********/
+echo "<u>Implementation of Observer design pattern to create the object as needed </u><br>";
+$gopal = new Reader('Gopal');
+$tapas = new Reader('Tapas');
+$somesh = new Reader('Somesh');
+
+$newspaper = new Newspaper("TOI");
+$newspaper->attach($gopal);
+$newspaper->attach($tapas);
+$newspaper->attach($somesh);
+$newspaper->detach($tapas);
+$newspaper->broadcastNews("Sensex jumps 390 pts, Nifty ends at 18K");
+
+$newspaper = new Newspaper("NCA");
+$newspaper->attach($tapas);
+$newspaper->broadcastNews("Sensex jumps 391 pts, Nifty ends at 18K");
 ?>
